@@ -8,8 +8,7 @@ public class JavaMain {
                 card2 = new Card(5, Suit.SPADES),
                 card3 = new Card(4, Suit.CLUBS),
                 card4 = new Card(9, Suit.SPADES);
-
-
+        
         Hand h = new Hand(starter, card1, card2, card3, card4);
 
         System.out.println(h.getScore());
