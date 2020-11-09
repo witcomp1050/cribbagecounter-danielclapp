@@ -21,15 +21,15 @@ public class Card {
     @Override
     public String toString() {
         if(_rank == 1)
-            return "A" + " of " + _suit;
+            return "A" + _suit;
         else if(_rank > 1 && _rank < 11)
-            return _rank + " of " + _suit;
+            return "" + _rank + _suit;
         else if(_rank == 11)
-            return "J" + " of "  + _suit;
+            return "J" + _suit;
         else if(_rank == 12)
-            return "Q" + " of " + _suit;
+            return "Q" + _suit;
         else if(_rank == 13)
-            return "K" + " of " + _suit;
+            return "K" + _suit;
         return "This is not a card I know ... interesting";
     }
 

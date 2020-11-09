@@ -5,7 +5,7 @@ import java.util.*;
 public class Game {
 
     static Card[] deck = new Card[52], hand = new Card[5];
-    static Suit[] suits = {Suit.HEARTS, Suit.DIAMONDS, Suit.CLUBS, Suit.SPADES};
+    static Suit[] suits = {Suit.H, Suit.D, Suit.C, Suit.S};
     static int[] cardsUsed = {-1, -1, -1, -1, -1};
     static Hand h;
     static int score;
@@ -56,7 +56,7 @@ public class Game {
 
     }
 
-    private static void createDeck() {
+    static void createDeck() {
         int j = 0;
         for(Suit s : suits) {
             for (int i = 0; i < 13; i++)
@@ -65,7 +65,7 @@ public class Game {
         }
     }
 
-    private static void createHand() {
+    static void createHand() {
         int rNum = -1, index = 0;
         boolean used;
 
