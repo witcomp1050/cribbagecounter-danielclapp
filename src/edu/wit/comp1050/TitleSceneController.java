@@ -22,7 +22,7 @@ public class TitleSceneController {
 
     public void handlePlayButtonClick() {
         playGameButton.setStyle("-fx-background-color: gray; ");
-        System.out.println("button pressed");
+        System.out.println("play button pressed");
     }
 
     public void handlePlayButtonReleased() throws IOException {

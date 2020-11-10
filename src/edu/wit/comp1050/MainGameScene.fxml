@@ -18,7 +18,7 @@
    <top>
       <VBox alignment="TOP_CENTER" prefHeight="97.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar>
+            <MenuBar style="-fx-background-color: #c4c4c4;">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
@@ -37,7 +37,7 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <Text fill="#781515" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Game Scene(change later)">
+            <Text fx:id="mainText" fill="#781515" strokeType="OUTSIDE" strokeWidth="0.0" text="Guess The Score">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
@@ -49,14 +49,14 @@
       </VBox>
    </top>
    <center>
-      <HBox alignment="CENTER" prefHeight="158.0" prefWidth="600.0" spacing="20.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="158.0" prefWidth="600.0" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="image1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@CardImages/JPEG/Bicycle_back.jpg" />
                </image>
                <HBox.margin>
-                  <Insets right="40.0" />
+                  <Insets right="60.0" />
                </HBox.margin>
             </ImageView>
             <ImageView fx:id="image2" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
@@ -95,7 +95,7 @@
             </Button>
             <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="200.0">
                <children>
-                  <TextField maxWidth="100.0" minHeight="30.0" prefHeight="30.0" prefWidth="80.0">
+                  <TextField fx:id="scoreTextBox" maxWidth="100.0" minHeight="30.0" prefHeight="30.0" prefWidth="80.0" onKeyTyped="#handleEnterKeyTyped">
                      <HBox.margin>
                         <Insets right="50.0" />
                      </HBox.margin>

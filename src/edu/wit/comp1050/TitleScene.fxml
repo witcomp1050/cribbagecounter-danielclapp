@@ -16,7 +16,7 @@
    <top>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar>
+            <MenuBar style="-fx-background-color: #c4c4c4;">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
@@ -59,7 +59,7 @@
             <Image url="@CardImages/JPEG/honor_heart-14.jpg" />
          </image>
          <BorderPane.margin>
-            <Insets left="20.0" />
+            <Insets left="60.0" />
          </BorderPane.margin>
       </ImageView>
    </left>
@@ -69,7 +69,7 @@
             <Image url="@CardImages/JPEG/honor_clubs.jpg" />
          </image>
          <BorderPane.margin>
-            <Insets right="20.0" />
+            <Insets right="60.0" />
          </BorderPane.margin>
       </ImageView>
    </right>
