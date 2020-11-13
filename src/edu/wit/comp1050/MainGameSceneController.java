@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
 import javax.swing.*;
@@ -18,6 +19,8 @@ import java.io.IOException;
 public class MainGameSceneController {
 
 
+    @FXML
+    BorderPane borderPane1;
     @FXML
     Button flipCardsButton;
     @FXML
@@ -37,13 +40,45 @@ public class MainGameSceneController {
     public TextField scoreTextBox;
     @FXML
     public Text mainText;
+    @FXML
+    public Text timerText;
+
 
     public int score;
     boolean buttonValue;
 
+    Runnable runnable = () -> {
+        for (double i = 99; i >= 0; i--) {
+            timerText.setText("" + (i / 10));
+            mainText.setX(borderPane1.getWidth() / 2);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    Thread timer = new Thread(runnable);
+
     public void initialize() {
         buttonValue = true;
         handInit();
+
+        Runnable checkTime = () -> {
+            while(true) {
+                if(timerText.getText().compareToIgnoreCase("0.0") == 0){
+                    timer.stop();
+                    timerText.setText("");
+                    mainText.setText("You ran out of time ... too bad. the score was " + score);
+                    flipCardsButton.setOpacity(100.0);
+                    showScore();
+                }
+            }
+        };
+
+        Thread checkTimeThread = new Thread(checkTime);
+        checkTimeThread.start();
     }
 
     public void handleFlipCardsButtonPressed() {
@@ -60,6 +95,8 @@ public class MainGameSceneController {
             image3.setImage(new Image("edu/wit/comp1050/CardImages/JPEG/" + Game.hand[2].toString() + ".jpg"));
             image4.setImage(new Image("edu/wit/comp1050/CardImages/JPEG/" + Game.hand[3].toString() + ".jpg"));
             image5.setImage(new Image("edu/wit/comp1050/CardImages/JPEG/" + Game.hand[4].toString() + ".jpg"));
+
+            timer.start();
 
             flipCardsButton.setText("Play Again");
             buttonValue = false;
@@ -89,10 +126,13 @@ public class MainGameSceneController {
     }
 
     public void handleGuessButtonReleased() {
+        double time = Double.parseDouble(timerText.getText());
+        timer.stop();
+        timer = new Thread(runnable);
         if(scoreTextBox.getText().compareToIgnoreCase("19") == 0){
             mainText.setText("That's impossible, you fool...");
         }else if(scoreTextBox.getText().compareToIgnoreCase(String.valueOf(score)) == 0) {
-            mainText.setText("You guessed it!!! The score is " + score);
+            mainText.setText("The score is " + score + " You guessed it in " + (10.0 - time) + " seconds");
             showScore();
         }else {
             mainText.setText("Wrong! The score is " + score);

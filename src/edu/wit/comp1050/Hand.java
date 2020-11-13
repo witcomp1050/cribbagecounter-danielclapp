@@ -174,44 +174,59 @@ public class Hand {
     }
 
     //adds up all the times 3, 4, or 5 cards are in a row(Ace is low) and stores it in _scores
+    boolean fiveRun() {
+
+        return false;
+    }
+
+    boolean fourRun() {
+
+        return false;
+    }
+
     int getRunScore() {
         int runScore = 0;
-        boolean isNull;
+        boolean isNull, checkRun = true;
 
-        for(int i = 0; i < _threeCards.length; i++) {
             isNull = false;
-            if(_threeCards[i][0].getRank() + 1 == _threeCards[i][1].getRank() && _threeCards[i][1].getRank() + 1 == _threeCards[i][2].getRank()) {
-                runScore += 3;
-                for (int j = 0; j < _scores.length && isNull == false; j++)
-                    if (_scores[j] == null) {
-                        _scores[j] = "Run: " + _threeCards[i][0] + ", " + _threeCards[i][1] + ", " + _threeCards[i][2];
-                        isNull = true;
-                    }
-            }
-        }
-
-        for(int j = 0; j < _fourCards.length; j++) {
-            isNull = false;
-            if(_fourCards[j][0].getRank() + 1 == _fourCards[j][1].getRank() && _fourCards[j][1].getRank() + 1 == _fourCards[j][2].getRank() && _fourCards[j][2].getRank() + 1 == _fourCards[j][3].getRank()) {
-                runScore += 4;
+            if (_sortedRanks[0] + 1 == _sortedRanks[1] && _sortedRanks[1] + 1 == _sortedRanks[2] && _sortedRanks[2] + 1 == _sortedRanks[3] && _sortedRanks[3] + 1 == _sortedRanks[4]) {
+                runScore += 5;
                 for (int i = 0; i < _scores.length && isNull == false; i++)
                     if (_scores[i] == null) {
-                        _scores[i] = "Run: " + _fourCards[j][0] + ", " + _fourCards[j][1] + ", " + _fourCards[j][2] + _fourCards[j][3];
+                        _scores[i] = "Run: " + _sortedRanks[0] + ", " + _sortedRanks[1] + ", " + _sortedRanks[2] + _sortedRanks[3] + ", " + _sortedRanks[4];
                         isNull = true;
+                        checkRun = false;
                     }
             }
-        }
 
-        isNull = false;
-        if(_sortedRanks[0] + 1 == _sortedRanks[1] && _sortedRanks[1] + 1 == _sortedRanks[2] && _sortedRanks[2] + 1 == _sortedRanks[3] && _sortedRanks[3] + 1 == _sortedRanks[4]) {
-            runScore += 5;
-            for (int i = 0; i < _scores.length && isNull == false; i++)
-                if (_scores[i] == null) {
-                    _scores[i] = "Run: " + _sortedRanks[0] + ", " + _sortedRanks[1] + ", " + _sortedRanks[2] + _sortedRanks[3] + ", " + _sortedRanks[4] ;
-                    isNull = true;
+            if(checkRun) {
+                for (int j = 0; j < _fourCards.length; j++) {
+                    isNull = false;
+                    if (_fourCards[j][0].getRank() + 1 == _fourCards[j][1].getRank() && _fourCards[j][1].getRank() + 1 == _fourCards[j][2].getRank() && _fourCards[j][2].getRank() + 1 == _fourCards[j][3].getRank()) {
+                        runScore += 4;
+                        for (int i = 0; i < _scores.length && isNull == false; i++)
+                            if (_scores[i] == null) {
+                                _scores[i] = "Run: " + _fourCards[j][0] + ", " + _fourCards[j][1] + ", " + _fourCards[j][2] + _fourCards[j][3];
+                                isNull = true;
+                                checkRun = false;
+                            }
+                    }
                 }
-        }
+            }
 
+            if(checkRun) {
+                for (int i = 0; i < _threeCards.length; i++) {
+                    isNull = false;
+                    if (_threeCards[i][0].getRank() + 1 == _threeCards[i][1].getRank() && _threeCards[i][1].getRank() + 1 == _threeCards[i][2].getRank()) {
+                        runScore += 3;
+                        for (int j = 0; j < _scores.length && isNull == false; j++)
+                            if (_scores[j] == null) {
+                                _scores[j] = "Run: " + _threeCards[i][0] + ", " + _threeCards[i][1] + ", " + _threeCards[i][2];
+                                isNull = true;
+                            }
+                    }
+                }
+            }
         return runScore;
     }
 
