@@ -1,6 +1,5 @@
 package edu.wit.comp1050;
 
-import com.sun.scenario.animation.shared.FiniteClipEnvelope;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,13 +7,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
-import javax.swing.*;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import static java.lang.Thread.yield;
 
 public class MainGameSceneController {
 
@@ -45,6 +45,7 @@ public class MainGameSceneController {
 
 
     public int score;
+    public ArrayList<String> scoreList = new ArrayList<String>();
     boolean buttonValue;
 
     Runnable runnable = () -> {
@@ -61,24 +62,31 @@ public class MainGameSceneController {
 
     Thread timer = new Thread(runnable);
 
+    Runnable checkTime = () -> {
+        boolean b = true;
+        while(b) {
+            if(timerText.getText().equals("0.0")){
+                timerText.setText("");
+                mainText.setText("You ran out of time ... too bad. the score was " + score + ". Better Luck Next Time");
+                flipCardsButton.setOpacity(100.0);
+                try {
+                    showScore();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                timer.stop();
+                b = false;
+            }
+            System.out.println(timerText.getText());
+        }
+
+    };
+
+    Thread checkTimeThread = new Thread(checkTime);
+
     public void initialize() {
         buttonValue = true;
         handInit();
-
-        Runnable checkTime = () -> {
-            while(true) {
-                if(timerText.getText().compareToIgnoreCase("0.0") == 0){
-                    timer.stop();
-                    timerText.setText("");
-                    mainText.setText("You ran out of time ... too bad. the score was " + score);
-                    flipCardsButton.setOpacity(100.0);
-                    showScore();
-                }
-            }
-        };
-
-        Thread checkTimeThread = new Thread(checkTime);
-        checkTimeThread.start();
     }
 
     public void handleFlipCardsButtonPressed() {
@@ -97,6 +105,7 @@ public class MainGameSceneController {
             image5.setImage(new Image("edu/wit/comp1050/CardImages/JPEG/" + Game.hand[4].toString() + ".jpg"));
 
             timer.start();
+            checkTimeThread.start();
 
             flipCardsButton.setText("Play Again");
             buttonValue = false;
@@ -111,11 +120,14 @@ public class MainGameSceneController {
             image4.setImage(new Image("edu/wit/comp1050/CardImages/JPEG/Bicycle_back.jpg"));
             image5.setImage(new Image("edu/wit/comp1050/CardImages/JPEG/Bicycle_back.jpg"));
 
+            timerText.setText("");
             scoreTextBox.setText("");
             mainText.setText("Guess The Score");
             flipCardsButton.setText("Flip Cards");
             handInit();
 
+            checkTimeThread = new Thread(checkTime);
+            timer = new Thread(runnable);
             buttonValue = true;
         }
     }
@@ -125,18 +137,21 @@ public class MainGameSceneController {
         guessButton.setStyle("-fx-background-color: gray; ");
     }
 
-    public void handleGuessButtonReleased() {
+    public void handleGuessButtonReleased() throws InterruptedException {
         double time = Double.parseDouble(timerText.getText());
         timer.stop();
-        timer = new Thread(runnable);
+        checkTimeThread.stop();
         if(scoreTextBox.getText().compareToIgnoreCase("19") == 0){
             mainText.setText("That's impossible, you fool...");
         }else if(scoreTextBox.getText().compareToIgnoreCase(String.valueOf(score)) == 0) {
-            mainText.setText("The score is " + score + " You guessed it in " + (10.0 - time) + " seconds");
-            showScore();
+            mainText.setText("The score is " + score + "! You guessed it in " + (10.0 - time) + " seconds");
         }else {
             mainText.setText("Wrong! The score is " + score);
         }
+
+        mainText.setText("The Score was " + score);
+        showScore();
+
         guessButton.setStyle("-fx-background-color: #adadad; ");
 
         flipCardsButton.setOpacity(100.0);
@@ -150,10 +165,27 @@ public class MainGameSceneController {
         Game.createDeck();
         Game.createHand();
         score = Game.h.getScore();
+        for(String s : Game.h._scores)
+            if(s != null)
+                scoreList.add(s);
     }
 
-    public void showScore() {
-
+    public void showScore() throws InterruptedException {
+//        String[] temp = new String[2];
+//        String[] images = new String[5];
+//
+//        //Thread.sleep(0);
+//
+//        for(String s : scoreList) {
+//            temp = s.split(":");
+//            images = temp[1].split(", ");
+//
+//            mainText.setText(temp[0]);
+//            for(String i : images)
+//                if(i != null && image1.getImage().equals(i + ".jpg"))
+//                    image1.setOpacity(0.0);
+//
+//        }
     }
 
     public Parent getContent() throws IOException {

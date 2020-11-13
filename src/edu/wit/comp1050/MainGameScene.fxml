@@ -63,7 +63,7 @@
    <center>
       <HBox alignment="CENTER" prefHeight="158.0" prefWidth="600.0" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="image1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="image1" fitHeight="150.0" fitWidth="200.0" opacity="0.98" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@CardImages/JPEG/Bicycle_back.jpg" />
                </image>
