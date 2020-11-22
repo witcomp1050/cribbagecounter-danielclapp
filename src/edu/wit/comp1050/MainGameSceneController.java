@@ -1,14 +1,19 @@
 package edu.wit.comp1050;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,6 +55,7 @@ public class MainGameSceneController {
 
     public static String userScore, actualScore;
 
+    Stage menuStage = new Stage();
 
     //Runnable thread used to handle the countdown timer.
     Runnable runnable = () -> {
@@ -80,19 +86,18 @@ public class MainGameSceneController {
 
     Thread checkTimeThread = new Thread(checkTime);
 
+    public MainGameSceneController() throws IOException {
+    }
+
     public void initialize() {
         buttonValue = true;
         handInit();
     }
 
-    //button changes color to indicate it has been pressed
-    public void handleFlipCardsButtonPressed() {
-        flipCardsButton.setStyle("-fx-background-color: gray; ");
-    }
-
+    //flips the cards over, starts the timer, checks to see if the user typed the correct score in.
     //flips the cards over, starts the timer, checks to see if the user typed the correct score in.
     //button is used as a 'Flip Cards' button and a 'Play Again' button toggled by the boolean button value
-    public void handleFlipCardsButtonReleased() {
+    public void handleFlipCardsButtonPressed() {
 
         // buttonValue true = flipCards
         // buttonValue false = playAgain
@@ -100,8 +105,7 @@ public class MainGameSceneController {
         //Flip Cards Button
         if(buttonValue) {
 
-            //changes button color back and hides the button once the cards are flipped, you cannot flip the cards again
-            flipCardsButton.setStyle("-fx-background-color: #adadad; ");
+            //Hides the button once the cards are flipped, you cannot flip the cards again
             flipCardsButton.setOpacity(0.0);
 
             //switches images from the back of card to the front
@@ -120,7 +124,7 @@ public class MainGameSceneController {
             flipCardsButton.setText("Play Again");
             buttonValue = false;
 
-        //Play Again Button
+            //Play Again Button
         }else if(flipCardsButton.getOpacity() != 0.0) {
 
             //changes button color back
@@ -148,14 +152,9 @@ public class MainGameSceneController {
         }
     }
 
-    //button changes color to indicate it has been pressed
-    public void handleGuessButtonPressed() {
-        guessButton.setStyle("-fx-background-color: gray; ");
-    }
-
     //checks the score when the button is pressed and proceeds accordingly
     //this can also be triggered by pressing the enter button(hopefully)
-    public void handleGuessButtonReleased() throws IOException {
+    public void handleGuessButtonPressed() throws IOException {
         //logs the time and stops running threads
 //        double time = Double.parseDouble(timerText.getText());
         timer.stop();
@@ -163,32 +162,16 @@ public class MainGameSceneController {
 
         userScore = scoreTextBox.getText();
         actualScore = String.valueOf(score);
-
-        //checks if you got the score right
-//        if(scoreTextBox.getText().compareToIgnoreCase("19") == 0){
-//            mainText.setText("That's impossible, you fool..."); //haha
-//        }else if(scoreTextBox.getText().compareToIgnoreCase(String.valueOf(score)) == 0) {
-//            mainText.setText("The score is " + score + "! You guessed it in " + (10.0 - time) + " seconds");
-//        }else {
-//            mainText.setText("Wrong! The score is " + score);
-//        }
+        System.out.printf("User Score: %s, Actual Score: %s\n", userScore, actualScore); //debug
 
         ShowScoreSceneController sssController = new ShowScoreSceneController();
         guessButton.getScene().setRoot(sssController.getContent());
 
-        //tells you what the score is
-        mainText.setText("The score was " + score);
-        timerText.setText("");
-
-        //changes back button color
-        guessButton.setStyle("-fx-background-color: #adadad; ");
-
         //makes play again button visible now that the game is over
         flipCardsButton.setOpacity(100.0);
-
     }
 
-    //doess the same thing as the guess button
+    //does the same thing as the guess button
     public void handleEnterKeyTyped() {
     }
 
@@ -212,5 +195,20 @@ public class MainGameSceneController {
 
     public Parent getContent() throws IOException {
         return FXMLLoader.load(getClass().getResource("MainGameScene.fxml"));
+    }
+
+    public void HandleMenuExitButtonPressed() {
+        menuStage.close();
+    }
+
+    public void handleSettingsPressed() throws IOException {
+        Scene menuScene = new Scene(FXMLLoader.load(getClass().getResource("MenuScene.fxml")));
+        menuStage.setScene(menuScene);
+        menuStage.initModality(Modality.APPLICATION_MODAL);
+        menuStage.showAndWait();
+    }
+
+    public void ExitGame() {
+        System.exit(0);
     }
 }

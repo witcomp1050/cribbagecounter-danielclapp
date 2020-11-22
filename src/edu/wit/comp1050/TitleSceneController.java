@@ -20,12 +20,7 @@ public class TitleSceneController {
     @FXML
     public Button playGameButton;
 
-    public void handlePlayButtonClick() {
-        playGameButton.setStyle("-fx-background-color: gray; ");
-        System.out.println("play button pressed");
-    }
-
-    public void handlePlayButtonReleased() throws IOException {
+    public void handlePlayButtonPressed() throws IOException {
         playGameButton.setStyle("-fx-background-color: #adadad; ");
         MainGameSceneController mgsController = new MainGameSceneController();
         playGameButton.getScene().setRoot(mgsController.getContent());
