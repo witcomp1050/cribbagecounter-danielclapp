@@ -111,7 +111,7 @@
             </Button>
             <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="scoreTextBox" maxWidth="100.0" minHeight="30.0" onKeyTyped="#handleEnterKeyTyped" prefHeight="30.0" prefWidth="80.0">
+                  <TextField fx:id="scoreTextBox" maxWidth="100.0" minHeight="30.0" onKeyPressed="#handleEnterKeyTyped" prefHeight="30.0" prefWidth="80.0">
                      <HBox.margin>
                         <Insets right="50.0" />
                      </HBox.margin>
