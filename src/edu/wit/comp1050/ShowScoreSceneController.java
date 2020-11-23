@@ -6,11 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ShowScoreSceneController {
 
@@ -18,12 +19,175 @@ public class ShowScoreSceneController {
     public Button playAgainButton;
     @FXML
     public Text text1;
+    @FXML
+    public HBox hBox1;
+    @FXML
+    public HBox hBox2;
+    @FXML
+    public HBox hBox3;
+    @FXML
+    public HBox hBox4;
+    @FXML
+    public HBox hBox5;
+    @FXML
+    public HBox hBox6;
+    @FXML
+    public HBox hBox7;
+    @FXML
+    public HBox hBox8;
+    @FXML
+    public HBox hBox9;
+    @FXML
+    public HBox hBox10;
+    @FXML
+    public HBox hBox11;
+    @FXML
+    public HBox hBox12;
 
+    ArrayList<String> scoreList = MainGameSceneController.scoreList;
+    ArrayList<ImageView> images = new ArrayList<>();
+    String[] temp = new String[2];
+    String[] tempImages = new String[5];
 
     public void initialize() {
         _userScore = MainGameSceneController.userScore;
         _actualScore = MainGameSceneController.actualScore;
         setText1();
+    }
+
+    void showScore() {
+
+        int i = 0;
+        for(String s : scoreList) {
+            temp = s.split(":");
+
+            Text scoreText = new Text(temp[0] + ": ");
+            Font font = new Font("System Bold", 24);
+            scoreText.setFont(font);
+
+            tempImages = temp[1].split(",");
+            for(String t : tempImages) {
+                images.add(new ImageView("edu/wit/comp1050/CardImages/JPEG/" + t + ".jpg"));
+            }
+
+
+
+            switch(i) {
+                case 0:
+                    hBox1.getChildren().add(scoreText);
+                    hBox1.setSpacing(20);
+                    for(ImageView iv : images) {
+                        iv.setFitHeight(132);
+                        iv.setFitWidth(86.375);
+                        hBox1.getChildren().add(iv);
+                    }
+                    break;
+                case 1:
+                    hBox2.getChildren().add(scoreText);
+                    hBox2.setSpacing(20);
+                    for(ImageView iv : images) {
+                        iv.setFitHeight(132);
+                        iv.setFitWidth(86.375);
+                        hBox2.getChildren().add(iv);
+                    }
+                    break;
+                case 2:
+                    hBox3.getChildren().add(scoreText);
+                    hBox3.setSpacing(20);
+                    for(ImageView iv : images) {
+                        iv.setFitHeight(132);
+                        iv.setFitWidth(86.375);
+                        hBox3.getChildren().add(iv);
+                    }
+                    break;
+                case(3):
+                    hBox4.getChildren().add(scoreText);
+                    hBox4.setSpacing(20);
+                    for(ImageView iv : images) {
+                        iv.setFitHeight(132);
+                        iv.setFitWidth(86.375);
+                        hBox4.getChildren().add(iv);
+                    }
+                    break;
+                case(4):
+                    hBox5.getChildren().add(scoreText);
+                    hBox5.setSpacing(20);
+                    for(ImageView iv : images) {
+                        iv.setFitHeight(132);
+                        iv.setFitWidth(86.375);
+                        hBox5.getChildren().add(iv);
+                    }
+                    break;
+                case(5):
+                    hBox6.getChildren().add(scoreText);
+                    hBox6.setSpacing(20);
+                    for(ImageView iv : images) {
+                        iv.setFitHeight(132);
+                        iv.setFitWidth(86.375);
+                        hBox6.getChildren().add(iv);
+                    }
+                    break;
+                case(6):
+                    hBox7.getChildren().add(scoreText);
+                    hBox7.setSpacing(20);
+                    for(ImageView iv : images) {
+                        iv.setFitHeight(132);
+                        iv.setFitWidth(86.375);
+                        hBox7.getChildren().add(iv);
+                    }
+                    break;
+                case(7):
+                    hBox8.getChildren().add(scoreText);
+                    hBox8.setSpacing(20);
+                    for(ImageView iv : images) {
+                        iv.setFitHeight(132);
+                        iv.setFitWidth(86.375);
+                        hBox8.getChildren().add(iv);
+                    }
+                    break;
+                case(8):
+                    hBox9.getChildren().add(scoreText);
+                    hBox9.setSpacing(20);
+                    for(ImageView iv : images) {
+                        iv.setFitHeight(132);
+                        iv.setFitWidth(86.375);
+                        hBox9.getChildren().add(iv);
+                    }
+                    break;
+                case(9):
+                    hBox10.getChildren().add(scoreText);
+                    hBox10.setSpacing(20);
+                    for(ImageView iv : images) {
+                        iv.setFitHeight(132);
+                        iv.setFitWidth(86.375);
+                        hBox10.getChildren().add(iv);
+                    }
+                    break;
+                case(10):
+                    hBox11.getChildren().add(scoreText);
+                    hBox11.setSpacing(20);
+                    for(ImageView iv : images) {
+                        iv.setFitHeight(132);
+                        iv.setFitWidth(86.375);
+                        hBox11.getChildren().add(iv);
+                    }
+                    break;
+                case(11):
+                    hBox12.getChildren().add(scoreText);
+                    hBox12.setSpacing(20);
+                    for(ImageView iv : images) {
+                        iv.setFitHeight(132);
+                        iv.setFitWidth(86.375);
+                        hBox12.getChildren().add(iv);
+                    }
+                    break;
+            }
+            i++;
+        }
+
+
+
+
     }
 
     void setText1() {
@@ -33,8 +197,10 @@ public class ShowScoreSceneController {
             text1.setText("You guessed it! the score was " + _actualScore);
             MainGameSceneController.handsCorrect++;
         }
-        else
+        else {
             text1.setText("Wrong! the score was " + _actualScore + "\n Better luck next time . . .");
+            showScore();
+        }
         System.out.println(MainGameSceneController.handsCorrect);
     }
 

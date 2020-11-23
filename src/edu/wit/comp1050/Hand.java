@@ -110,7 +110,7 @@ public class Hand {
                 score += 2;
                 for (int i = 0; i < _scores.length && isNull == false; i++)
                     if (_scores[i] == null) {
-                        _scores[i] = "15: " + c[0].toString() + ", " + c[1].toString();
+                        _scores[i] = "15:" + c[0].toString() + "," + c[1].toString();
                         isNull = true;
                     }
             }
@@ -122,7 +122,7 @@ public class Hand {
                 score += 2;
                 for (int i = 0; i < _scores.length && isNull == false; i++)
                     if (_scores[i] == null) {
-                        _scores[i] = "15: " + c[0].toString() + ", " + c[1].toString() + ", " + c[2].toString();
+                        _scores[i] = "15:" + c[0].toString() + "," + c[1].toString() + "," + c[2].toString();
                         isNull = true;
                     }
             }
@@ -134,7 +134,7 @@ public class Hand {
                 score += 2;
                 for (int i = 0; i < _scores.length && isNull == false; i++)
                     if (_scores[i] == null) {
-                        _scores[i] = "15: " + c[0].toString() + ", " + c[1].toString() + ", " + c[2].toString() + ", " + c[3].toString();
+                        _scores[i] = "15:" + c[0].toString() + "," + c[1].toString() + "," + c[2].toString() + "," + c[3].toString();
                         isNull = true;
                     }
             }
@@ -145,7 +145,7 @@ public class Hand {
             score += 2;
             for (int i = 0; i < _scores.length && isNull == false; i++)
                 if (_scores[i] == null) {
-                    _scores[i] = "15: " + _cards[0].toString() + ", " + _cards[1].toString() + ", " + _cards[2].toString() + ", " + _cards[3].toString() + ", " + _cards[4].toString();
+                    _scores[i] = "15:" + _cards[0].toString() + "," + _cards[1].toString() + "," + _cards[2].toString() + "," + _cards[3].toString() + "," + _cards[4].toString();
                     isNull = true;
                 }
         }
@@ -164,7 +164,7 @@ public class Hand {
                 pairScore += 2;
                 for (int i = 0; i < _scores.length && isNull == false; i++)
                     if (_scores[i] == null) {
-                        _scores[i] = "Pair: " + c[0].toString() + ", " + c[1].toString();
+                        _scores[i] = "Pair:" + c[0].toString() + "," + c[1].toString();
                         isNull = true;
                     }
             }
@@ -193,7 +193,7 @@ public class Hand {
                 runScore += 5;
                 for (int i = 0; i < _scores.length && isNull == false; i++)
                     if (_scores[i] == null) {
-                        _scores[i] = "Run: " + _sortedRanks[0] + ", " + _sortedRanks[1] + ", " + _sortedRanks[2] + _sortedRanks[3] + ", " + _sortedRanks[4];
+                        _scores[i] = "Run:" + _sortedRanks[0] + "," + _sortedRanks[1] + "," + _sortedRanks[2] + _sortedRanks[3] + "," + _sortedRanks[4];
                         isNull = true;
                         checkRun = false;
                     }
@@ -206,7 +206,7 @@ public class Hand {
                         runScore += 4;
                         for (int i = 0; i < _scores.length && isNull == false; i++)
                             if (_scores[i] == null) {
-                                _scores[i] = "Run: " + _fourCards[j][0] + ", " + _fourCards[j][1] + ", " + _fourCards[j][2] + _fourCards[j][3];
+                                _scores[i] = "Run:" + _fourCards[j][0] + "," + _fourCards[j][1] + "," + _fourCards[j][2] + _fourCards[j][3];
                                 isNull = true;
                                 checkRun = false;
                             }
@@ -221,7 +221,7 @@ public class Hand {
                         runScore += 3;
                         for (int j = 0; j < _scores.length && isNull == false; j++)
                             if (_scores[j] == null) {
-                                _scores[j] = "Run: " + _threeCards[i][0] + ", " + _threeCards[i][1] + ", " + _threeCards[i][2];
+                                _scores[j] = "Run:" + _threeCards[i][0] + "," + _threeCards[i][1] + "," + _threeCards[i][2];
                                 isNull = true;
                             }
                     }
@@ -239,7 +239,7 @@ public class Hand {
             if (_cards[i].getRank() == 11 && _cards[i].getSuit() == _cards[0].getSuit()) {
                 for (int j = 0; j < _scores.length && isNull == false; j++)
                     if (_scores[j] == null) {
-                        _scores[j] = "Nob: " + _cards[i].toString() + ", " + _cards[0].toString();
+                        _scores[j] = "Nob:" + _cards[i].toString() + "," + _cards[0].toString();
                         isNull = true;
                     }
                 return 1;
@@ -258,14 +258,14 @@ public class Hand {
         if(_cards[0].getSuit() == _cards[1].getSuit()) {
             for (int j = 0; j < _scores.length && isNull == false; j++)
                 if (_scores[j] == null) {
-                    _scores[j] = "Flush: " + _cards[0].toString() + ", " + _cards[1].toString() + ", " + _cards[2].toString() + ", " + _cards[3].toString() + ", " + _cards[4].toString();
+                    _scores[j] = "Flush:" + _cards[0].toString() + "," + _cards[1].toString() + "," + _cards[2].toString() + "," + _cards[3].toString() + "," + _cards[4].toString();
                     isNull = true;
                 }
             return 5;
         } else {
             for (int j = 0; j < _scores.length && isNull == false; j++)
                 if (_scores[j] == null) {
-                    _scores[j] = "Flush: " + _cards[2].toString() + ", " + _cards[3].toString() + ", " + _cards[4].toString();
+                    _scores[j] = "Flush:" + _cards[1].toString() + "," + _cards[2].toString() + "," + _cards[3].toString() + "," + _cards[4].toString();
                     isNull = true;
                 }
             return 4;

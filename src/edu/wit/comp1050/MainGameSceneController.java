@@ -54,7 +54,7 @@ public class MainGameSceneController {
     static double bestTime = 11.0;
 
     public int score;
-    public ArrayList<String> scoreList = new ArrayList<>();
+    public static ArrayList<String> scoreList = new ArrayList<>();
     boolean buttonValue;
 
     public static String userScore, actualScore;
@@ -77,6 +77,7 @@ public class MainGameSceneController {
     Runnable checkTime = () -> {
         boolean b = true;
         while(b) {
+            System.out.print("");
             if(timerText.getText().equals("0.0")){
                 timerText.setText("");
                 mainText.setText("You ran out of time ... too bad. the score was " + score);
@@ -159,6 +160,8 @@ public class MainGameSceneController {
         public void handleGuessButtonPressed () throws IOException {
             //logs the time and stops running threads
             double time = 10.0 - Double.parseDouble(timerText.getText());
+            double totalTime = 0;
+            totalTime += time;
             timer.stop();
             checkTimeThread.stop();
 
@@ -176,8 +179,8 @@ public class MainGameSceneController {
             //Statistics
             handsScored++;
             percentCorrect = (handsCorrect / handsScored) * 100;
-            averageTime = Math.round(((averageTime + time) / handsScored) * 100) / 100;
-            if (time < bestTime) bestTime = Math.round(time * 100) / 100;
+            averageTime = Math.round(((totalTime) / handsScored) * 100.0) / 100.0;
+            if (time < bestTime) bestTime = Math.round(time * 100.0) / 100.0;
         }
 
         //does the same thing as the guess button

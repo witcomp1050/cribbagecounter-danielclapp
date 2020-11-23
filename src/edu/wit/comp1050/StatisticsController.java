@@ -18,7 +18,10 @@ public class StatisticsController {
         menuHandsScored.setText("Hands scored: " + MainGameSceneController.handsScored);
         menuPercentCorrect.setText("Percent of hands scored correctly: " + MainGameSceneController.percentCorrect + "%");
         menuAverageTime.setText("Average Time: " + MainGameSceneController.averageTime + " seconds");
-        menuBestTime.setText("Best Time: " + MainGameSceneController.bestTime + " seconds");
+        if(MainGameSceneController.bestTime != 11.0)
+            menuBestTime.setText("Best Time: " + MainGameSceneController.bestTime + " seconds");
+        else
+            menuBestTime.setText("Best Time: 0.0 seconds");
     }
 
 }
