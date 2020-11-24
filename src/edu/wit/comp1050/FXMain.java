@@ -16,8 +16,6 @@ import javafx.scene.layout.VBox;
 
 public class FXMain extends Application {
 
-    Scene titleScene, gameScene;
-
     @Override
     public void start(Stage window) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("TitleScene.fxml"));
@@ -26,7 +24,6 @@ public class FXMain extends Application {
         window.setTitle("Cribbage Counter Game");
         window.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);
