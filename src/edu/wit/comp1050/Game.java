@@ -12,10 +12,12 @@ public class Game {
 
     public static void main(String[] args) {
 
-        createDeck();
+        Game g = new Game();
+
+        g.createDeck();
 
         while(true) {
-            createHand();
+            g.createHand();
 
             Scanner reader = new Scanner(System.in);
             System.out.println("\nYour Hand is: \n\n" + h.toString());
@@ -26,10 +28,10 @@ public class Game {
 
             if (score == hScore) {
                 System.out.println("\nCorrect! You won. \nThe correct score is " + hScore + "\n");
-                printScore();
+                g.printScore();
             }else {
                 System.out.println("Wrong! the correct score is: " + hScore);
-                printScore();
+                g.printScore();
             }
 
             Scanner strReader = new Scanner(System.in);
@@ -56,7 +58,7 @@ public class Game {
 
     }
 
-    static void createDeck() {
+    void createDeck() {
         int j = 0;
         for(Suit s : suits) {
             for (int i = 0; i < 13; i++)
@@ -65,7 +67,7 @@ public class Game {
         }
     }
 
-    static void createHand() {
+    void createHand() {
         int rNum = -1, index = 0;
         boolean used;
 
@@ -99,7 +101,7 @@ public class Game {
 //        }
     }
 
-    private static void printScore() {
+    private void printScore() {
         for (String s : h._scores)
             if (s != null)
                 System.out.println(s);

@@ -33,11 +33,11 @@ public class Hand {
     //prints out each card in the hand
     @Override
     public String toString() {
-        return "Starter: " + _cards[0].toString() + "\n" +
-                "Card 1: " + _cards[1].toString() + "\n" +
-                "Card 2: " + _cards[2].toString() + "\n" +
-                "Card 3: " + _cards[3].toString() + "\n" +
-                "Card 4: " + _cards[4].toString() + "\n";
+        return  _cards[0].toString() + "," +
+                _cards[1].toString() + "," +
+                _cards[2].toString() + "," +
+                _cards[3].toString() + "," +
+                _cards[4].toString();
     }
 
     //creates an array of the cards' ranks

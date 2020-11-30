@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -47,11 +48,18 @@ public class MainGameSceneController {
     @FXML
     public Text timerText;
 
+    @FXML
+    public Button settingsApplyButton;
+    @FXML
+    public TextField settingsTextBox;
+    @FXML
+    public CheckBox settingsCheckBox;
+    public static boolean settingsShowScore = true;
 
     public static double handsScored = 0, handsCorrect = 0;
     public static double percentCorrect = 0.0;
     static double averageTime = 0.0;
-    static double bestTime = 11.0;
+    static double bestTime = 11.0, time = 10.0;
 
     public int score;
     public static ArrayList<String> scoreList = new ArrayList<>();
@@ -62,9 +70,11 @@ public class MainGameSceneController {
     Stage settingsStage = new Stage(), statisticsStage = new Stage();
     boolean settingsMod = true, statisticsMod = true;
 
+    static Hand hand;
+
     //Runnable thread used to handle the countdown timer.
     Runnable runnable = () -> {
-        for (double i = 99; i >= 0; i--) {
+        for (double i = time * 10; i >= 0; i--) {
             timerText.setText("" + (i / 10));
             mainText.setX(borderPane1.getWidth() / 2);
             sleep(100);
@@ -192,10 +202,13 @@ public class MainGameSceneController {
 
         //creates a hand to be scored
         public void handInit () {
-            Game.createDeck();
-            Game.createHand();
-            score = Game.h.getScore();
-            for (String s : Game.h._scores)
+            scoreList.removeAll(scoreList);
+            Game game = new Game();
+            game.createDeck();
+            game.createHand();
+            hand = game.h;
+            score = hand.getScore();
+            for (String s : hand._scores)
                 if (s != null)
                     scoreList.add(s);
         }
@@ -234,6 +247,19 @@ public class MainGameSceneController {
                 statisticsMod = false;
             }
             statisticsStage.showAndWait();
+        }
+
+        public void handleApplyButtonPressed() {
+
+            try {
+                if(Double.parseDouble(settingsTextBox.getText()) > 0)
+                    time = Double.parseDouble(settingsTextBox.getText());
+            } catch(Exception ex) {
+                System.out.println(ex);
+            }
+            settingsShowScore = settingsCheckBox.isSelected();
+            settingsCheckBox.setSelected(settingsShowScore);
+            settingsTextBox.setText("");
         }
 
 }

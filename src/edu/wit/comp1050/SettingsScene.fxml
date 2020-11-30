@@ -22,7 +22,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Timer(seconds)" />
-                  <TextField maxWidth="40.0">
+                  <TextField fx:id="settingsTextBox" maxWidth="40.0">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
@@ -32,14 +32,14 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Show Answer" />
-                  <CheckBox mnemonicParsing="false" selected="true">
+                  <CheckBox fx:id="settingsCheckBox" mnemonicParsing="false" selected="true">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </CheckBox>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" text="Apply" />
+            <Button fx:id="settingsApplyButton" onMouseClicked="#handleApplyButtonPressed" mnemonicParsing="false" text="Apply" />
          </children>
          <BorderPane.margin>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
