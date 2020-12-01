@@ -21,17 +21,12 @@
          <children>
             <MenuBar style="-fx-background-color: #c4c4c4;">
               <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="Menu">
                   <items>
                     <MenuItem fx:id="SettingsMenuItem" mnemonicParsing="false" onAction="#handleSettingsPressed" text="Settings" />
                         <MenuItem fx:id="menuStatistics" mnemonicParsing="false" onAction="#HandleMenuStatisticsPressed" text="Statistics" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem fx:id="MenuClose" mnemonicParsing="false" onAction="#ExitGame" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
                   </items>
                 </Menu>
               </menus>

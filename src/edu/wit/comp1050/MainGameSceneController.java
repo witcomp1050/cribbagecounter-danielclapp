@@ -53,7 +53,7 @@ public class MainGameSceneController {
     @FXML
     public TextField settingsTextBox;
     @FXML
-    public CheckBox settingsCheckBox;
+    public CheckBox settingsCheckBox = new CheckBox();
     public static boolean settingsShowScore = true;
 
     public static double handsScored = 0, handsCorrect = 0;
@@ -228,6 +228,7 @@ public class MainGameSceneController {
         public void handleSettingsPressed () throws IOException {
             Scene settingsScene = new Scene(FXMLLoader.load(getClass().getResource("SettingsScene.fxml")));
             settingsStage.setScene(settingsScene);
+            settingsCheckBox.setSelected(settingsShowScore);
             if(settingsMod) {
                 settingsStage.initModality(Modality.APPLICATION_MODAL);
                 settingsMod = false;
@@ -257,6 +258,7 @@ public class MainGameSceneController {
             } catch(Exception ex) {
                 System.out.println(ex);
             }
+            System.out.println(settingsCheckBox.isSelected());
             settingsShowScore = settingsCheckBox.isSelected();
             settingsCheckBox.setSelected(settingsShowScore);
             settingsTextBox.setText("");
