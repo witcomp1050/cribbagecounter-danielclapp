@@ -200,9 +200,6 @@ public class ShowScoreSceneController {
         else if(_userScore.equals(_actualScore)) {
             text1.setText("You guessed it! the score was " + _actualScore);
             MainGameSceneController.handsCorrect++;
-        }
-        else if (!_userScore.equals(_actualScore) && MainGameSceneController.settingsShowScore) {
-            text1.setText("Wrong! the score was " + _actualScore + "\n Better luck next time . . .");
         } else {
             text1.setText("Wrong! the score was " + _actualScore + "\n Better luck next time . . .");
             showScore();
