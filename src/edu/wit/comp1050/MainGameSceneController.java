@@ -56,10 +56,11 @@ public class MainGameSceneController {
     public CheckBox settingsCheckBox = new CheckBox();
     public static boolean settingsShowScore = true;
 
-    public static double handsScored = 0, handsCorrect = 0;
+    public static double handsCorrect = 0;
     public static double percentCorrect = 0.0;
     static double averageTime = 0.0;
     static double bestTime = 11.0, time = 10.0;
+    public static int handsScored;
 
     public int score;
     public static ArrayList<String> scoreList = new ArrayList<>();
@@ -188,7 +189,7 @@ public class MainGameSceneController {
 
             //Statistics
             handsScored++;
-            percentCorrect = (handsCorrect / handsScored) * 100;
+            percentCorrect = (handsCorrect / (double)(handsScored)) * 100;
             averageTime = Math.round(((totalTime) / handsScored) * 100.0) / 100.0;
             if (time < bestTime) bestTime = Math.round(time * 100.0) / 100.0;
         }
